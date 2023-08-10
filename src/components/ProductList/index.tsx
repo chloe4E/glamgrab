@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import getAllProducts from "../../api/productsApi";
 import type { Product } from "../../Types/types";
+import ProductCard from "../ProductCard";
+import Grid from "@mui/material/Grid";
 
 const ProductList: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -13,9 +15,13 @@ const ProductList: React.FC = () => {
   return (
     <div>
       <h1>Articles available</h1>
-      {products.map((product: Product) => (
-        <p>{product.title}</p>
-      ))}
+      <Grid container spacing={2}>
+        {products.map((product: Product) => (
+          <Grid item xs={4}>
+            <ProductCard product={product} key={product.id} />
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 };
