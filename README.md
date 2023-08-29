@@ -1,3 +1,33 @@
+# How tu run this app
+
+## in development:
+
+FRONTEND
+
+```bash
+make start.frontend
+```
+
+SERVER:
+
+```bash
+make start.backend
+```
+
+## in production:
+
+FRONTEND
+
+```bash
+make build.frontend
+```
+
+SERVER:
+
+```bash
+make start.backend
+```
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
