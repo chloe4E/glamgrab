@@ -7,13 +7,18 @@ import Typography from "@mui/material/Typography";
 import { Product } from "../../Types/types";
 import { useState } from "react";
 import ActionBar from "./productActionBar";
-import { Box } from "../../../node_modules/@mui/material/index";
 
 interface ProductCardProps {
   product: Product;
+  onAddProductToCart: () => void;
+  onRemoveProductFromCart: () => void;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard: React.FC<ProductCardProps> = ({
+  product,
+  onAddProductToCart,
+  onRemoveProductFromCart,
+}) => {
   const [expanded, setExpanded] = useState(false);
   const [quantity, setQuantity] = useState(0);
 
@@ -25,10 +30,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   const handleAdd = () => {
     setQuantity(quantity + 1);
+    onAddProductToCart();
   };
   const handleRemove = () => {
     if (quantity > 0) {
       setQuantity(quantity - 1);
+      onRemoveProductFromCart();
     }
   };
 
