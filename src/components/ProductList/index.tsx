@@ -4,7 +4,15 @@ import type { Product } from "../../Types/types";
 import ProductCard from "../ProductCard";
 import Grid from "@mui/material/Grid";
 
-const ProductList: React.FC = () => {
+interface ProductListProps {
+  handleAddToCart: () => void;
+  handleRemoveFromCart: () => void;
+}
+
+const ProductList: React.FC<ProductListProps> = ({
+  handleAddToCart,
+  handleRemoveFromCart,
+}) => {
   const [products, setProducts] = useState<Product[]>([]);
   useEffect(() => {
     getAllProducts()
@@ -13,16 +21,17 @@ const ProductList: React.FC = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Articles available</h1>
-      <Grid container spacing={2}>
-        {products.map((product: Product) => (
-          <Grid item xs={4}>
-            <ProductCard product={product} key={product.id} />
-          </Grid>
-        ))}
-      </Grid>
-    </div>
+    <Grid container spacing={2}>
+      {products.map((product: Product) => (
+        <Grid item xs={4} key={product.id}>
+          <ProductCard
+            product={product}
+            onAddProductToCart={handleAddToCart}
+            onRemoveProductFromCart={handleRemoveFromCart}
+          />
+        </Grid>
+      ))}
+    </Grid>
   );
 };
 
