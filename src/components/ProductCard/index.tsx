@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Product } from "../../Types/types";
 import { useState } from "react";
+import ActionBar from "./productActionBar";
 
 interface ProductCardProps {
   product: Product;
@@ -13,13 +14,22 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const [expanded, setExpanded] = useState(false);
+  const [quantity, setQuantity] = useState(0);
 
   const handleExpand = () => {
     setExpanded(!expanded);
   };
-
   const descriptionLimit = 200;
   const isDescriptionLong = product.description.length > descriptionLimit;
+
+  const handleAdd = () => {
+    setQuantity(quantity + 1);
+  };
+  const handleRemove = () => {
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+    }
+  };
 
   return (
     <Card sx={{ height: 450 }}>
@@ -27,6 +37,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         sx={{ height: 140 }}
         image={product.image}
         title={product.title}
+      />
+      <ActionBar
+        quantity={quantity}
+        onAdd={handleAdd}
+        onRemove={handleRemove}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
