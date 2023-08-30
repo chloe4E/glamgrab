@@ -1,13 +1,25 @@
 package main
 
 import (
+	"fmt"
+	"io"
 	"log"
 	"net/http"
 )
 
+func getRoot(w http.ResponseWriter, r *http.Request) {
+	fmt.Printf("got / request\n")
+	io.WriteString(w, "Welcome to glamgarb!\n")
+}
+
+func getHello(w http.ResponseWriter, r *http.Request) {
+	fmt.Printf("got /hello request\n")
+	io.WriteString(w, "Hello, HTTP!\n")
+}
+
 func main() {
-	fs := http.FileServer(http.Dir("frontend/build")) // change to serve the correct build file
-	http.Handle("/", fs)
+	http.HandleFunc("/", getRoot)
+	http.HandleFunc("/hello", getHello)
 
 	log.Println("Listening on :3000")
 
