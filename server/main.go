@@ -1,11 +1,15 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"io"
 	"log"
 	"net/http"
+	"os"
 )
+
+// TODO handlers shall be moved to a separate file
 
 func getRoot(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("got / request\n")
@@ -24,7 +28,10 @@ func main() {
 	log.Println("Listening on :3000")
 
 	err := http.ListenAndServe(":3000", nil)
-	if err != nil {
-		log.Fatal(err)
+	if errors.Is(err, http.ErrServerClosed) {
+		fmt.Printf("server closed\n")
+	} else if err != nil {
+		fmt.Printf("error starting server: %s\n", err)
+		os.Exit(1)
 	}
 }
