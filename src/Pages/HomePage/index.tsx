@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ButtonAppBar from "../../components/Header";
+import { ContainerWithTitle } from "../../components/PageLayout";
 import ProductList from "../../components/ProductList";
 
 const HomePage = () => {
@@ -14,12 +15,15 @@ const HomePage = () => {
   return (
     <>
       <ButtonAppBar numberOfItemsInCart={numberOfItemsInCart} />
-      <ProductList
-        handleAddToCart={handleAddToCart}
-        handleRemoveFromCart={handleRemoveFromCart}
-      />
+      <ContainerWithTitle title="Articles available">
+        <ProductList
+          handleAddToCart={handleAddToCart}
+          handleRemoveFromCart={handleRemoveFromCart}
+        />
+      </ContainerWithTitle>
     </>
   );
 };
+``;
 
 export default HomePage;

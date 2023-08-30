@@ -74,7 +74,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           )}
         </Typography>
         <Typography
-          variant="body2"
+          variant="h6"
           color="text.secondary"
           sx={{ textAlign: "right" }}
         >

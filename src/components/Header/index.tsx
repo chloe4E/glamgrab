@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
+import CheckroomIcon from "@mui/icons-material/Checkroom";
 
 interface ButtonAppBarProps {
   numberOfItemsInCart: number;
@@ -25,9 +26,19 @@ const ButtonAppBar: React.FC<ButtonAppBarProps> = ({ numberOfItemsInCart }) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Welcome to Glamgarb
-          </Typography>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <CheckroomIcon />
+            <Typography variant="h6" m={1}>
+              Welcome to Glamgarb
+            </Typography>
+          </Box>
+
           <IconButton>
             <ShoppingBasketIcon />
           </IconButton>

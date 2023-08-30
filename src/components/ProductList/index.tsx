@@ -21,20 +21,17 @@ const ProductList: React.FC<ProductListProps> = ({
   }, []);
 
   return (
-    <div>
-      <h1>Articles available</h1>
-      <Grid container spacing={2}>
-        {products.map((product: Product) => (
-          <Grid item xs={4} key={product.id}>
-            <ProductCard
-              product={product}
-              onAddProductToCart={handleAddToCart}
-              onRemoveProductFromCart={handleRemoveFromCart}
-            />
-          </Grid>
-        ))}
-      </Grid>
-    </div>
+    <Grid container spacing={2}>
+      {products.map((product: Product) => (
+        <Grid item xs={4} key={product.id}>
+          <ProductCard
+            product={product}
+            onAddProductToCart={handleAddToCart}
+            onRemoveProductFromCart={handleRemoveFromCart}
+          />
+        </Grid>
+      ))}
+    </Grid>
   );
 };
 
