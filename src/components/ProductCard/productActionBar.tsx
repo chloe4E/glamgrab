@@ -25,7 +25,7 @@ const ActionBar: React.FC<ActionBarProps> = ({ quantity, onAdd, onRemove }) => {
     );
   } else {
     return (
-      <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
+      <Box sx={{ display: "flex", alignItems: "center" }}>
         <IconButton aria-label="previous">
           <IndeterminateCheckBoxIcon onClick={onRemove} color="warning" />
         </IconButton>

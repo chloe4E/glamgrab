@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import { Product } from "../../Types/types";
 import { useState } from "react";
 import ActionBar from "./productActionBar";
+import { Box } from "../../../node_modules/@mui/material/index";
 
 interface ProductCardProps {
   product: Product;
@@ -38,11 +39,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         image={product.image}
         title={product.title}
       />
-      <ActionBar
-        quantity={quantity}
-        onAdd={handleAdd}
-        onRemove={handleRemove}
-      />
+      <CardActions
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <ActionBar
+          quantity={quantity}
+          onAdd={handleAdd}
+          onRemove={handleRemove}
+        />
+      </CardActions>
+
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {product.title}
@@ -65,9 +74,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           {product.price}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Add to Cart</Button>
-      </CardActions>
     </Card>
   );
 };
