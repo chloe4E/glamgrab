@@ -8,7 +8,6 @@ const HomePage = () => {
     setNumberOfItemsInCart(numberOfItemsInCart + 1);
   };
   const handleRemoveFromCart = () => {
-    console.log("handleRemoveFromCart rtigger");
     setNumberOfItemsInCart(numberOfItemsInCart - 1);
   };
 
