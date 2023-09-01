@@ -13,7 +13,7 @@ import (
 
 func getRoot(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("got / request\n")
-	io.WriteString(w, "Welcome to glamgarb!\n")
+	io.WriteString(w, "Welcome to glamgrab!\n")
 }
 
 func getHello(w http.ResponseWriter, r *http.Request) {
