@@ -35,7 +35,7 @@ const ButtonAppBar: React.FC<ButtonAppBarProps> = ({ numberOfItemsInCart }) => {
           >
             <CheckroomIcon />
             <Typography variant="h6" m={1}>
-              Welcome to Glamgarb
+              Welcome to Glamgrab
             </Typography>
           </Box>
 
