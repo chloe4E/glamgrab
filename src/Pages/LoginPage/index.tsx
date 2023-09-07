@@ -5,8 +5,10 @@ function LoginPage2() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
+    console.log("Request URL:", "http://localhost:3000/hello");
+
     // Make an API request to the Go backend
-    fetch("/hello", {
+    fetch("http://localhost:3000/hello", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

@@ -75,7 +75,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	// Create a new CORS handler
 	c := cors.New(cors.Options{
-		AllowedOrigins: []string{"http://localhost:5173"},
+		AllowedOrigins: []string{"http://localhost:5173", "http://127.0.0.1:5173"},
 		AllowedMethods: []string{"GET", "POST", "OPTIONS"},
 	})
 	mux := http.NewServeMux()
