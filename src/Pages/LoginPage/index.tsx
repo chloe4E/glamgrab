@@ -6,13 +6,19 @@ function LoginPage2() {
 
   useEffect(() => {
     // Make an API request to the Go backend
-    fetch("/hello")
+    fetch("/hello", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      mode: "cors",
+    })
       .then((response) => response.json())
       .then((data) => {
         setMessage(data.message);
       })
-      .catch(() => {
-        console.error("Error");
+      .catch((error) => {
+        console.error("Error:" + error);
       });
   }, []);
 
