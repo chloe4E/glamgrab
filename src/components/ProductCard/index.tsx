@@ -25,6 +25,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const handleExpand = () => {
     setExpanded(!expanded);
   };
+
+  const pricePerUnitWithCurrency = (price: number, currency: string) => {
+    return `${price.toFixed(2)}${currency}/unit`;
+  };
   const descriptionLimit = 200;
   const isDescriptionLong = product.description.length > descriptionLimit;
 
@@ -78,8 +82,20 @@ const ProductCard: React.FC<ProductCardProps> = ({
           color="text.secondary"
           sx={{ textAlign: "right" }}
         >
-          {product.price}
+          {pricePerUnitWithCurrency(Number(product.price), "€")}
         </Typography>
+        {quantity ? (
+          <Typography
+            variant="body1"
+            color="text.secondary"
+            sx={{ textAlign: "right" }}
+          >
+            Currently in your basket: <br />
+            {Number(product.price) * Number(quantity)}€
+          </Typography>
+        ) : (
+          ""
+        )}
       </CardContent>
     </Card>
   );
