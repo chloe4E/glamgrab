@@ -7,12 +7,19 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import CheckroomIcon from "@mui/icons-material/Checkroom";
+import LoginIcon from "@mui/icons-material/Login";
+import { useNavigate } from "react-router-dom";
 
 interface ButtonAppBarProps {
   numberOfItemsInCart: number;
 }
 
 const ButtonAppBar: React.FC<ButtonAppBarProps> = ({ numberOfItemsInCart }) => {
+  const navigate = useNavigate();
+  const handleLoginClick = () => {
+    console.log("navigates");
+    navigate("/login");
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -25,6 +32,9 @@ const ButtonAppBar: React.FC<ButtonAppBarProps> = ({ numberOfItemsInCart }) => {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
+          </IconButton>
+          <IconButton onClick={handleLoginClick}>
+            <LoginIcon />
           </IconButton>
           <Box
             sx={{
