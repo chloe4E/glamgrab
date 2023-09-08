@@ -11,15 +11,6 @@ type LoginInfoRequestBody struct {
 	Password string `json:"password" validate:"required"`
 }
 
-func contains(slice []string, str string) bool {
-	for _, s := range slice {
-		if s == str {
-			return true
-		}
-	}
-	return false
-}
-
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("got /login request\n")
 
