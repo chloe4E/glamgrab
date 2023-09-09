@@ -7,6 +7,9 @@ import Typography from "@mui/material/Typography";
 import { Product } from "../../Types/types";
 import { useState } from "react";
 import ActionBar from "./productActionBar";
+import { MarginSmallPx } from "../../utils/styles";
+import { Chip } from "@mui/material";
+import { Margin } from "@mui/icons-material";
 
 interface ProductCardProps {
   product: Product;
@@ -29,7 +32,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   const pricePerUnitWithCurrency = (price: number, currency: string) => {
     return `${price.toFixed(2)}${currency}/unit`;
   };
-  const descriptionLimit = 200;
+  const descriptionLimit = 50;
   const isDescriptionLong = product.description.length > descriptionLimit;
 
   const handleAdd = () => {
@@ -44,29 +47,37 @@ const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   return (
-    <Card sx={{ height: 450 }}>
+    <Card sx={{ height: 450, p: MarginSmallPx }}>
       <CardMedia
-        sx={{ height: 140 }}
+        sx={{ height: 140, marginBottom: MarginSmallPx }}
         image={product.image}
         title={product.title}
       />
-      <CardActions
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <ActionBar
-          quantity={quantity}
-          onAdd={handleAdd}
-          onRemove={handleRemove}
-        />
-      </CardActions>
+      <Chip label={product.category} size="small" />
 
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography gutterBottom variant="h6" component="div">
           {product.title}
         </Typography>
+        <Typography
+          variant="h6"
+          color="text.secondary"
+          sx={{ textAlign: "right" }}
+        >
+          {pricePerUnitWithCurrency(Number(product.price), "€")}
+        </Typography>
+        <CardActions
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <ActionBar
+            quantity={quantity}
+            onAdd={handleAdd}
+            onRemove={handleRemove}
+          />
+        </CardActions>
         <Typography variant="body2" color="text.secondary">
           {expanded
             ? product.description
@@ -77,13 +88,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             </Button>
           )}
         </Typography>
-        <Typography
-          variant="h6"
-          color="text.secondary"
-          sx={{ textAlign: "right" }}
-        >
-          {pricePerUnitWithCurrency(Number(product.price), "€")}
-        </Typography>
+
         {quantity ? (
           <Typography
             variant="body1"

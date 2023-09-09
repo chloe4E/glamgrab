@@ -16,7 +16,20 @@ interface ActionBarProps {
 const ActionBar: React.FC<ActionBarProps> = ({ quantity, onAdd, onRemove }) => {
   if (quantity == 0) {
     return (
-      <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexGrow: 1,
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "text.secondary",
+          borderRadius: "8px",
+          "&:hover": {
+            backgroundColor: "primary.dark",
+            opacity: [0.9, 0.8, 0.7],
+          },
+        }}
+      >
         <IconButton aria-label="addToCart" onClick={onAdd}>
           <AddShoppingCartIcon />
         </IconButton>
