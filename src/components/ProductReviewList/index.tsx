@@ -1,21 +1,16 @@
-import React, { useEffect, useState } from "react";
-import getAllProducts from "../../api/productsApi";
-import type { Product } from "../../Types/types";
+import React from "react";
+import type { ProductInBag } from "../../Types/types";
 
 import Grid from "@mui/material/Grid";
 import ProductReviewCard from "../ProductReviewCard";
+import useGlamGrabStore from "../../store/store";
 
 const ProductReviewList: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  useEffect(() => {
-    getAllProducts()
-      .then((data) => setProducts(data))
-      .catch((error) => console.log(`error this will be a toast: ${error}`));
-  }, []);
+  const productsInBag = useGlamGrabStore((state) => state.productsInBag);
 
   return (
     <Grid container spacing={2}>
-      {products.map((product: Product) => (
+      {productsInBag.map((product: ProductInBag) => (
         <Grid item lg={12} key={product.id}>
           <ProductReviewCard item={product} />
         </Grid>

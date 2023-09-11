@@ -9,12 +9,20 @@ import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import CheckroomIcon from "@mui/icons-material/Checkroom";
 import LoginIcon from "@mui/icons-material/Login";
 import { useNavigate } from "react-router-dom";
+import useGlamGrabStore from "../../store/store";
+import { useEffect, useState } from "react";
 
-interface ButtonAppBarProps {
-  numberOfItemsInCart: number;
-}
+const ButtonAppBar: React.FC = () => {
+  const { productsInBag } = useGlamGrabStore();
+  const [total, setTotal] = useState(0);
+  useEffect(() => {
+    const result = productsInBag.reduce(
+      (total, product) => total + (product.quantity || 0),
+      0
+    );
+    setTotal(result);
+  }, [productsInBag]);
 
-const ButtonAppBar: React.FC<ButtonAppBarProps> = ({ numberOfItemsInCart }) => {
   const navigate = useNavigate();
   const handleLoginClick = () => {
     console.log("navigates");
@@ -56,7 +64,7 @@ const ButtonAppBar: React.FC<ButtonAppBarProps> = ({ numberOfItemsInCart }) => {
               <ShoppingBasketIcon />
             </IconButton>
             <Typography variant="h6" component="div" sx={{ ml: 1 }}>
-              {numberOfItemsInCart}
+              {total}
             </Typography>
           </Box>
         </Toolbar>

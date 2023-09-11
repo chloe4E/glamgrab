@@ -3,17 +3,20 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Item } from "../../Types/types";
+import { ProductInBag } from "../../Types/types";
+import useGlamGrabStore from "../../store/store";
+import ActionBar from "../ProductCard/productActionBar";
 
 interface ProductReviewCardProps {
-  item: Item;
+  item: ProductInBag;
 }
 
 const ProductReviewCard: React.FC<ProductReviewCardProps> = ({
   item,
 }: ProductReviewCardProps) => {
+  const addToBag = useGlamGrabStore((state) => state.addToBag);
+  const removeFromBag = useGlamGrabStore((state) => state.removeFromBag);
   return (
     <Card
       sx={{
@@ -41,14 +44,11 @@ const ProductReviewCard: React.FC<ProductReviewCardProps> = ({
           alignItems: "center",
         }}
       >
-        <Button size="small">-</Button>
-        <Typography
-          variant="body2"
-          sx={{ margin: "0", padding: "0", minWidth: "1em" }}
-        >
-          0 {/* Total amount */}
-        </Typography>
-        <Button size="small">+</Button>
+        <ActionBar
+          quantity={item.quantity || 0}
+          onAdd={() => addToBag(item)}
+          onRemove={() => removeFromBag(item.id)}
+        />
       </CardActions>
     </Card>
   );

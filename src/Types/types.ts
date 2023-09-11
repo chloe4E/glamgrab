@@ -7,9 +7,10 @@ type Product = {
   image: string;
 };
 
-interface Item {
+interface ProductInBag {
   quantity?: number;
   unitPrice?: number;
+  id: number;
   title: string;
   price: string;
   category: string;
@@ -17,4 +18,4 @@ interface Item {
   image: string;
 }
 
-export type { Product, Item };
+export type { Product, ProductInBag };
