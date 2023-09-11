@@ -15,21 +15,40 @@ const ProductReviewCard: React.FC<ProductReviewCardProps> = ({
   item,
 }: ProductReviewCardProps) => {
   return (
-    <Card sx={{ maxWidth: "100%" }}>
+    <Card
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        maxWidth: "100%",
+        padding: "8px",
+      }}
+    >
       <CardMedia
         component="img"
         alt="item-miniature"
-        height="140"
+        sx={{ width: 151 }}
         image={item.image}
       />
-      <CardContent>
+      <CardContent sx={{ flex: "1" }}>
         <Typography gutterBottom variant="h5" component="div">
           {item.title}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+      <CardActions
+        sx={{
+          flex: "0 0 auto",
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
+        <Button size="small">-</Button>
+        <Typography
+          variant="body2"
+          sx={{ margin: "0", padding: "0", minWidth: "1em" }}
+        >
+          0 {/* Total amount */}
+        </Typography>
+        <Button size="small">+</Button>
       </CardActions>
     </Card>
   );
