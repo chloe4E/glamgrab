@@ -2,11 +2,13 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Product } from "../../Types/types";
 import { useState } from "react";
 import ActionBar from "./productActionBar";
+import { MarginSmallPx, MarginMediumPx } from "../../utils/styles";
+import { Chip } from "@mui/material";
+import CardContentWithReadMore from "./CardContentWithReadMore";
 
 interface ProductCardProps {
   product: Product;
@@ -19,18 +21,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
   onAddProductToCart,
   onRemoveProductFromCart,
 }) => {
-  const [expanded, setExpanded] = useState(false);
   const [quantity, setQuantity] = useState(0);
 
-  const handleExpand = () => {
-    setExpanded(!expanded);
-  };
-
   const pricePerUnitWithCurrency = (price: number, currency: string) => {
-    return `${price.toFixed(2)}${currency}/unit`;
+    return `${price.toFixed(2)}${currency}`;
   };
-  const descriptionLimit = 200;
-  const isDescriptionLong = product.description.length > descriptionLimit;
 
   const handleAdd = () => {
     setQuantity(quantity + 1);
@@ -44,58 +39,77 @@ const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   return (
-    <Card sx={{ height: 450 }}>
+    <Card sx={{ minHeight: 450, p: MarginSmallPx }}>
       <CardMedia
-        sx={{ height: 140 }}
+        sx={{
+          height: 140,
+          marginBottom: MarginSmallPx,
+        }}
         image={product.image}
         title={product.title}
       />
-      <CardActions
+      <Chip label={product.category} size="small" />
+
+      <CardContent
         sx={{
-          display: "flex",
-          justifyContent: "center",
+          p: 0,
         }}
       >
-        <ActionBar
-          quantity={quantity}
-          onAdd={handleAdd}
-          onRemove={handleRemove}
-        />
-      </CardActions>
-
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography
+          gutterBottom
+          variant="subtitle1"
+          noWrap
+          style={{
+            overflow: "hidden", // Hides overflow text
+            textOverflow: "ellipsis", // Displays ellipsis for overflow text
+            whiteSpace: "nowrap", // Prevents line breaks
+            marginTop: MarginMediumPx,
+            marginBottom: MarginSmallPx,
+            textAlign: "left",
+          }}
+        >
           {product.title}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {expanded
-            ? product.description
-            : product.description.slice(0, descriptionLimit)}
-          {isDescriptionLong && !expanded && (
-            <Button size="small" onClick={handleExpand}>
-              Read More
-            </Button>
-          )}
-        </Typography>
         <Typography
-          variant="h6"
-          color="text.secondary"
-          sx={{ textAlign: "right" }}
+          variant="subtitle1"
+          color="warning.main"
+          sx={{
+            textAlign: "left",
+            fontWeight: "bold",
+            marginBottom: MarginMediumPx,
+          }}
         >
           {pricePerUnitWithCurrency(Number(product.price), "€")}
         </Typography>
+        <CardActions
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            p: 0,
+            marginBottom: MarginMediumPx,
+          }}
+        >
+          <ActionBar
+            quantity={quantity}
+            onAdd={handleAdd}
+            onRemove={handleRemove}
+          />
+        </CardActions>
+
         {quantity ? (
           <Typography
-            variant="body1"
+            variant="caption"
             color="text.secondary"
             sx={{ textAlign: "right" }}
           >
-            Currently in your basket: <br />
+            You have currently {quantity} piece(s) of this item in your bag:{" "}
+            <br />
             {Number(product.price) * Number(quantity)}€
           </Typography>
         ) : (
           ""
         )}
+        <CardContentWithReadMore text={product.description} />
       </CardContent>
     </Card>
   );
