@@ -15,7 +15,7 @@ const ProductReviewCard: React.FC<ProductReviewCardProps> = ({
   item,
 }: ProductReviewCardProps) => {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: "100%" }}>
       <CardMedia
         component="img"
         alt="item-miniature"

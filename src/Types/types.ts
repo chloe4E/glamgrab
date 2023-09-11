@@ -8,8 +8,8 @@ type Product = {
 };
 
 interface Item {
-  quantity: number;
-  unitPrice: number;
+  quantity?: number;
+  unitPrice?: number;
   title: string;
   price: string;
   category: string;
