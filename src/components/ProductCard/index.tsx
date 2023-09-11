@@ -2,7 +2,6 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Product } from "../../Types/types";
 import { useState } from "react";
@@ -22,18 +21,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
   onAddProductToCart,
   onRemoveProductFromCart,
 }) => {
-  const [expanded, setExpanded] = useState(false);
   const [quantity, setQuantity] = useState(0);
-
-  const handleExpand = () => {
-    setExpanded(!expanded);
-  };
 
   const pricePerUnitWithCurrency = (price: number, currency: string) => {
     return `${price.toFixed(2)}${currency}`;
   };
-  const descriptionLimit = 50;
-  const isDescriptionLong = product.description.length > descriptionLimit;
 
   const handleAdd = () => {
     setQuantity(quantity + 1);
@@ -103,18 +95,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             onRemove={handleRemove}
           />
         </CardActions>
-        {/*         <CardContentWithReadMore text={product.description} /> */}
-        <Typography variant="body2" color="text.secondary">
-          Product details:
-          {expanded
-            ? product.description
-            : product.description.slice(0, descriptionLimit)}
-          {isDescriptionLong && !expanded && (
-            <Button size="small" onClick={handleExpand}>
-              Read More
-            </Button>
-          )}
-        </Typography>
+        <CardContentWithReadMore text={product.description} />
 
         {quantity ? (
           <Typography

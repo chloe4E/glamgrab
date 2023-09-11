@@ -17,20 +17,36 @@ const CardContentWithReadMore: React.FC<CardContentWithReadMoreProps> = ({
   };
 
   return (
-    <>
-      <Typography
-        variant="body2"
-        noWrap={!expanded}
-        style={{ lineHeight: "1.2em" }}
-      >
-        {text}
-      </Typography>
+    // <>
+    //   <Typography
+    //     variant="body2"
+    //     noWrap={!expanded}
+    //     style={{ lineHeight: "1.2em" }}
+    //   >
+    //     {text}
+    //   </Typography>
+    //   {!expanded && (
+    //     <Typography variant="body2">
+    //       <Button color="primary" onClick={toggleExpanded}>
+    //         Read More
+    //       </Button>
+    //     </Typography>
+    //   )}
+    // </>
+
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      style={{ lineHeight: "1.5em" }}
+    >
+      Product details: <br />
+      {expanded ? text : text.slice(0, 50)}
       {!expanded && (
-        <Button color="primary" onClick={toggleExpanded}>
+        <Button size="small" onClick={toggleExpanded}>
           Read More
         </Button>
       )}
-    </>
+    </Typography>
   );
 };
 
