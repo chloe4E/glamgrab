@@ -5,7 +5,7 @@ import type { Product } from "../../Types/types";
 import Grid from "@mui/material/Grid";
 import ProductReviewCard from "../ProductReviewCard";
 
-const ProductSummaryList: React.FC = () => {
+const ProductReviewList: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   useEffect(() => {
     getAllProducts()
@@ -24,4 +24,4 @@ const ProductSummaryList: React.FC = () => {
   );
 };
 
-export default ProductSummaryList;
+export default ProductReviewList;

@@ -2,7 +2,7 @@ import React from "react";
 import ButtonAppBar from "../../components/Header";
 import { ContainerWithTitle } from "../../components/PageLayout";
 
-import ProductSummaryList from "../../components/ProductSummaryList";
+import ProductReviewList from "../../components/ProductReviewList";
 import { Item } from "../../Types/types";
 
 interface BagReviewPageProps {
@@ -21,7 +21,7 @@ const BagReviewPage: React.FC<BagReviewPageProps> = ({
     <>
       <ButtonAppBar numberOfItemsInCart={12} />
       <ContainerWithTitle title="Bag Review:">
-        <ProductSummaryList />
+        <ProductReviewList />
       </ContainerWithTitle>
     </>
   );
