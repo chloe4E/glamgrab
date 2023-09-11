@@ -1,34 +1,20 @@
-import React, { useEffect, useState } from "react";
-import getAllProducts from "../../api/productsApi";
+import React, { useEffect } from "react";
 import type { Product } from "../../Types/types";
 import ProductCard from "../ProductCard";
 import Grid from "@mui/material/Grid";
+import useGlamGrabStore from "../../store/store";
 
-interface ProductListProps {
-  handleAddToCart: () => void;
-  handleRemoveFromCart: () => void;
-}
-
-const ProductList: React.FC<ProductListProps> = ({
-  handleAddToCart,
-  handleRemoveFromCart,
-}) => {
-  const [products, setProducts] = useState<Product[]>([]);
+const ProductList: React.FC = () => {
+  const { products, fetchAllProducts } = useGlamGrabStore();
   useEffect(() => {
-    getAllProducts()
-      .then((data) => setProducts(data))
-      .catch((error) => console.log(`error this will be a toast: ${error}`));
-  }, []);
+    fetchAllProducts();
+  }, [fetchAllProducts]);
 
   return (
     <Grid container spacing={2}>
       {products.map((product: Product) => (
-        <Grid item xs={12} sm={6} md={4} lg={3}key={product.id}>
-          <ProductCard
-            product={product}
-            onAddProductToCart={handleAddToCart}
-            onRemoveProductFromCart={handleRemoveFromCart}
-          />
+        <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
+          <ProductCard product={product} />
         </Grid>
       ))}
     </Grid>

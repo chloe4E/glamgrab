@@ -9,35 +9,22 @@ import ActionBar from "./productActionBar";
 import { MarginSmallPx, MarginMediumPx } from "../../utils/styles";
 import { Chip } from "@mui/material";
 import CardContentWithReadMore from "./CardContentWithReadMore";
+import useGlamGrabStore from "../../store/store";
 
 interface ProductCardProps {
   product: Product;
-  onAddProductToCart: () => void;
-  onRemoveProductFromCart: () => void;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({
-  product,
-  onAddProductToCart,
-  onRemoveProductFromCart,
-}) => {
-  const [quantity, setQuantity] = useState(0);
-
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const pricePerUnitWithCurrency = (price: number, currency: string) => {
     return `${price.toFixed(2)}${currency}`;
   };
 
-  const handleAdd = () => {
-    setQuantity(quantity + 1);
-    onAddProductToCart();
-  };
-  const handleRemove = () => {
-    if (quantity > 0) {
-      setQuantity(quantity - 1);
-      onRemoveProductFromCart();
-    }
-  };
-
+  const addToBag = useGlamGrabStore((state) => state.addToBag);
+  const removeFromBag = useGlamGrabStore((state) => state.removeFromBag);
+  const currentlyInBag = useGlamGrabStore((state) =>
+    state.productsInBag.find((p) => p.id == product.id)
+  );
   return (
     <Card sx={{ minHeight: 450, p: MarginSmallPx }}>
       <CardMedia
@@ -90,21 +77,21 @@ const ProductCard: React.FC<ProductCardProps> = ({
           }}
         >
           <ActionBar
-            quantity={quantity}
-            onAdd={handleAdd}
-            onRemove={handleRemove}
+            quantity={currentlyInBag ? currentlyInBag?.quantity || 0 : 0}
+            onAdd={() => addToBag(product)}
+            onRemove={() => removeFromBag(product.id)}
           />
         </CardActions>
 
-        {quantity ? (
+        {currentlyInBag?.quantity ? (
           <Typography
             variant="caption"
             color="text.secondary"
             sx={{ textAlign: "right" }}
           >
-            You have currently {quantity} piece(s) of this item in your bag:{" "}
-            <br />
-            {Number(product.price) * Number(quantity)}€
+            You have currently {currentlyInBag.quantity} piece(s) of this item
+            in your bag: <br />
+            {Number(product.price) * Number(currentlyInBag.quantity)}€
           </Typography>
         ) : (
           ""

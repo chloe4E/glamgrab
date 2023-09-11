@@ -5,10 +5,10 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Item } from "../../Types/types";
+import { ProductInBag } from "../../Types/types";
 
 interface ProductReviewCardProps {
-  item: Item;
+  item: ProductInBag;
 }
 
 const ProductReviewCard: React.FC<ProductReviewCardProps> = ({
