@@ -39,7 +39,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   return (
-    <Card sx={{ height: 450, p: MarginSmallPx }}>
+    <Card sx={{ minHeight: 450, p: MarginSmallPx }}>
       <CardMedia
         sx={{
           height: 140,
@@ -95,20 +95,21 @@ const ProductCard: React.FC<ProductCardProps> = ({
             onRemove={handleRemove}
           />
         </CardActions>
-        <CardContentWithReadMore text={product.description} />
 
         {quantity ? (
           <Typography
-            variant="body1"
+            variant="caption"
             color="text.secondary"
             sx={{ textAlign: "right" }}
           >
-            Currently in your basket: <br />
+            You have currently {quantity} piece(s) of this item in your bag:{" "}
+            <br />
             {Number(product.price) * Number(quantity)}€
           </Typography>
         ) : (
           ""
         )}
+        <CardContentWithReadMore text={product.description} />
       </CardContent>
     </Card>
   );

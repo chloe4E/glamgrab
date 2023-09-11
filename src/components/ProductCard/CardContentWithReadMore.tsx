@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { MarginMediumPx } from "../../utils/styles";
 
 interface CardContentWithReadMoreProps {
   text: string;
@@ -11,42 +13,32 @@ const CardContentWithReadMore: React.FC<CardContentWithReadMoreProps> = ({
 }) => {
   const [expanded, setExpanded] = useState(false);
 
-  // Function to toggle the expanded state
   const toggleExpanded = () => {
     setExpanded(!expanded);
   };
 
   return (
-    // <>
-    //   <Typography
-    //     variant="body2"
-    //     noWrap={!expanded}
-    //     style={{ lineHeight: "1.2em" }}
-    //   >
-    //     {text}
-    //   </Typography>
-    //   {!expanded && (
-    //     <Typography variant="body2">
-    //       <Button color="primary" onClick={toggleExpanded}>
-    //         Read More
-    //       </Button>
-    //     </Typography>
-    //   )}
-    // </>
-
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      style={{ lineHeight: "1.5em" }}
-    >
-      Product details: <br />
-      {expanded ? text : text.slice(0, 50)}
-      {!expanded && (
-        <Button size="small" onClick={toggleExpanded}>
-          Read More
-        </Button>
-      )}
-    </Typography>
+    <Accordion sx={{ marginTop: MarginMediumPx }}>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        onClick={toggleExpanded}
+        aria-controls="panel1a-content"
+        id="panel1a-header"
+      >
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          sx={{ fontWeight: "bold" }}
+        >
+          Product Details: <br />
+        </Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <Typography variant="body2" color="text.secondary">
+          {text}
+        </Typography>
+      </AccordionDetails>
+    </Accordion>
   );
 };
 
