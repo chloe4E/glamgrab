@@ -9,7 +9,7 @@ import { useState } from "react";
 import ActionBar from "./productActionBar";
 import { MarginSmallPx } from "../../utils/styles";
 import { Chip } from "@mui/material";
-import { Margin } from "@mui/icons-material";
+import CardContentWithReadMore from "./CardContentWithReadMore";
 
 interface ProductCardProps {
   product: Product;
@@ -30,7 +30,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   const pricePerUnitWithCurrency = (price: number, currency: string) => {
-    return `${price.toFixed(2)}${currency}/unit`;
+    return `${price.toFixed(2)}${currency}`;
   };
   const descriptionLimit = 50;
   const isDescriptionLong = product.description.length > descriptionLimit;
@@ -49,20 +49,41 @@ const ProductCard: React.FC<ProductCardProps> = ({
   return (
     <Card sx={{ height: 450, p: MarginSmallPx }}>
       <CardMedia
-        sx={{ height: 140, marginBottom: MarginSmallPx }}
+        sx={{
+          height: 140,
+          marginBottom: MarginSmallPx,
+          border: "1px solid green",
+        }}
         image={product.image}
         title={product.title}
       />
-      <Chip label={product.category} size="small" />
+      <Chip
+        label={product.category}
+        size="small"
+        style={{
+          border: "1px solid blue",
+        }}
+      />
 
       <CardContent>
-        <Typography gutterBottom variant="h6" component="div">
+        <Typography
+          gutterBottom
+          variant="subtitle1"
+          noWrap
+          style={{
+            overflow: "hidden", // Hides overflow text
+            textOverflow: "ellipsis", // Displays ellipsis for overflow text
+            whiteSpace: "nowrap", // Prevents line breaks
+            border: "1px solid red",
+            textAlign: "left",
+          }}
+        >
           {product.title}
         </Typography>
         <Typography
-          variant="h6"
-          color="text.secondary"
-          sx={{ textAlign: "right" }}
+          variant="subtitle1"
+          color="warning.main"
+          sx={{ textAlign: "left", fontWeight: "bold" }}
         >
           {pricePerUnitWithCurrency(Number(product.price), "€")}
         </Typography>
@@ -78,7 +99,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
             onRemove={handleRemove}
           />
         </CardActions>
+        {/*         <CardContentWithReadMore text={product.description} /> */}
         <Typography variant="body2" color="text.secondary">
+          Product details:
           {expanded
             ? product.description
             : product.description.slice(0, descriptionLimit)}
