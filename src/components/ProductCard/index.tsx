@@ -4,7 +4,6 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Product } from "../../Types/types";
-import { useState } from "react";
 import ActionBar from "./productActionBar";
 import { MarginSmallPx, MarginMediumPx } from "../../utils/styles";
 import { Chip } from "@mui/material";
