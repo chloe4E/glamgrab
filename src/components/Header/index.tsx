@@ -20,6 +20,9 @@ const ButtonAppBar: React.FC<ButtonAppBarProps> = ({ numberOfItemsInCart }) => {
     console.log("navigates");
     navigate("/login");
   };
+  const handleGoToBagReviewClick = () => {
+    navigate("/bagReview");
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -48,13 +51,14 @@ const ButtonAppBar: React.FC<ButtonAppBarProps> = ({ numberOfItemsInCart }) => {
               Welcome to Glamgrab
             </Typography>
           </Box>
-
-          <IconButton>
-            <ShoppingBasketIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ ml: 1 }}>
-            {numberOfItemsInCart}
-          </Typography>
+          <Box onClick={handleGoToBagReviewClick}>
+            <IconButton>
+              <ShoppingBasketIcon />
+            </IconButton>
+            <Typography variant="h6" component="div" sx={{ ml: 1 }}>
+              {numberOfItemsInCart}
+            </Typography>
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>
