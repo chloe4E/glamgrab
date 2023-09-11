@@ -30,9 +30,6 @@ const ActionBar: React.FC<ActionBarProps> = ({ quantity, onAdd, onRemove }) => {
             opacity: [0.9, 0.8, 0.7],
           },
 
-          border: "1px solid blue",
-          m: 0,
-          p: 0,
           width: "100%",
         }}
       >

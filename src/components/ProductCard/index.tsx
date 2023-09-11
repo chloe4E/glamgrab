@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import { Product } from "../../Types/types";
 import { useState } from "react";
 import ActionBar from "./productActionBar";
-import { MarginSmallPx } from "../../utils/styles";
+import { MarginSmallPx, MarginMediumPx } from "../../utils/styles";
 import { Chip } from "@mui/material";
 import CardContentWithReadMore from "./CardContentWithReadMore";
 
@@ -52,20 +52,17 @@ const ProductCard: React.FC<ProductCardProps> = ({
         sx={{
           height: 140,
           marginBottom: MarginSmallPx,
-          border: "1px solid green",
         }}
         image={product.image}
         title={product.title}
       />
-      <Chip
-        label={product.category}
-        size="small"
-        style={{
-          border: "1px solid blue",
-        }}
-      />
+      <Chip label={product.category} size="small" />
 
-      <CardContent>
+      <CardContent
+        sx={{
+          p: 0,
+        }}
+      >
         <Typography
           gutterBottom
           variant="subtitle1"
@@ -74,7 +71,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
             overflow: "hidden", // Hides overflow text
             textOverflow: "ellipsis", // Displays ellipsis for overflow text
             whiteSpace: "nowrap", // Prevents line breaks
-            border: "1px solid red",
+            marginTop: MarginMediumPx,
+            marginBottom: MarginSmallPx,
             textAlign: "left",
           }}
         >
@@ -83,7 +81,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
         <Typography
           variant="subtitle1"
           color="warning.main"
-          sx={{ textAlign: "left", fontWeight: "bold" }}
+          sx={{
+            textAlign: "left",
+            fontWeight: "bold",
+            marginBottom: MarginMediumPx,
+          }}
         >
           {pricePerUnitWithCurrency(Number(product.price), "€")}
         </Typography>
@@ -91,6 +93,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
           sx={{
             display: "flex",
             justifyContent: "center",
+            p: 0,
+            marginBottom: MarginMediumPx,
           }}
         >
           <ActionBar
