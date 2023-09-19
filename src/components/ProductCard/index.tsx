@@ -32,8 +32,24 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         height: "100%", // Ensure each card takes the full height of its parent
       }}
     >
-      <Card sx={{ minHeight: 450, p: MarginSmallPx, flex: 1 }}>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
+      <Card
+        sx={{
+          minHeight: 450,
+          p: MarginSmallPx,
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          border: "1px solid green",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            border: "1px solid blue",
+          }}
+        >
           <CardMedia
             component="img"
             alt="item-miniature"
@@ -41,13 +57,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             image={product.image}
           />
         </Box>
-        <Chip label={product.category} size="small" />
 
         <CardContent
           sx={{
             p: 0,
+            border: "1px solid red",
           }}
         >
+          <Chip label={product.category} size="small" />
+
           <Typography
             gutterBottom
             variant="subtitle1"
