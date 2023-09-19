@@ -41,6 +41,9 @@ const ButtonAppBar: React.FC = () => {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
+            onClick={() => {
+              navigate("/");
+            }}
           >
             <MenuIcon />
           </IconButton>

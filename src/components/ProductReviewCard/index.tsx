@@ -7,6 +7,8 @@ import Typography from "@mui/material/Typography";
 import { ProductInBag } from "../../Types/types";
 import useGlamGrabStore from "../../store/store";
 import ActionBar from "../ProductCard/productActionBar";
+import { IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 interface ProductReviewCardProps {
   item: ProductInBag;
@@ -15,8 +17,11 @@ interface ProductReviewCardProps {
 const ProductReviewCard: React.FC<ProductReviewCardProps> = ({
   item,
 }: ProductReviewCardProps) => {
-  const addToBag = useGlamGrabStore((state) => state.addToBag);
-  const removeFromBag = useGlamGrabStore((state) => state.removeFromBag);
+  const addToBag = useGlamGrabStore((state) => state.addOneToBag);
+  const removeFromBag = useGlamGrabStore((state) => state.removeOneFromBag);
+  const removeItemFromBag = useGlamGrabStore(
+    (state) => state.removeItemFromBag
+  );
   return (
     <Card
       sx={{
@@ -36,11 +41,15 @@ const ProductReviewCard: React.FC<ProductReviewCardProps> = ({
         <Typography gutterBottom variant="h5" component="div">
           {item.title}
         </Typography>
+        <IconButton onClick={() => removeItemFromBag(item.id)}>
+          <DeleteIcon />
+        </IconButton>
+        Remove
       </CardContent>
       <CardActions
         sx={{
           flex: "0 0 auto",
-          flexDirection: "row",
+          flexDirection: "column",
           alignItems: "center",
         }}
       >
@@ -49,6 +58,9 @@ const ProductReviewCard: React.FC<ProductReviewCardProps> = ({
           onAdd={() => addToBag(item)}
           onRemove={() => removeFromBag(item.id)}
         />
+        <Typography gutterBottom variant="h5" component="div">
+          Total: {item.price * item.quantity}
+        </Typography>
       </CardActions>
     </Card>
   );

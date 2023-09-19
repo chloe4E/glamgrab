@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import { Product } from "../../Types/types";
 import ActionBar from "./productActionBar";
 import { MarginSmallPx, MarginMediumPx } from "../../utils/styles";
-import { autocompleteClasses, Box, Chip } from "@mui/material";
+import { Box, Chip } from "@mui/material";
 import CardContentWithReadMore from "./CardContentWithReadMore";
 import useGlamGrabStore from "../../store/store";
 
@@ -19,8 +19,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     return `${price.toFixed(2)}${currency}`;
   };
 
-  const addToBag = useGlamGrabStore((state) => state.addToBag);
-  const removeFromBag = useGlamGrabStore((state) => state.removeFromBag);
+  const addToBag = useGlamGrabStore((state) => state.addOneToBag);
+  const removeFromBag = useGlamGrabStore((state) => state.removeOneFromBag);
   const currentlyInBag = useGlamGrabStore((state) =>
     state.productsInBag.find((p) => p.id == product.id)
   );
