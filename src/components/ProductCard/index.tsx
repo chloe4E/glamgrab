@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import { Product } from "../../Types/types";
 import ActionBar from "./productActionBar";
 import { MarginSmallPx, MarginMediumPx } from "../../utils/styles";
-import { Chip } from "@mui/material";
+import { Box, Chip } from "@mui/material";
 import CardContentWithReadMore from "./CardContentWithReadMore";
 import useGlamGrabStore from "../../store/store";
 
@@ -25,79 +25,87 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     state.productsInBag.find((p) => p.id == product.id)
   );
   return (
-    <Card sx={{ minHeight: 450, p: MarginSmallPx }}>
-      <CardMedia
-        sx={{
-          height: 140,
-          marginBottom: MarginSmallPx,
-        }}
-        image={product.image}
-        title={product.title}
-      />
-      <Chip label={product.category} size="small" />
-
-      <CardContent
-        sx={{
-          p: 0,
-        }}
-      >
-        <Typography
-          gutterBottom
-          variant="subtitle1"
-          noWrap
-          style={{
-            overflow: "hidden", // Hides overflow text
-            textOverflow: "ellipsis", // Displays ellipsis for overflow text
-            whiteSpace: "nowrap", // Prevents line breaks
-            marginTop: MarginMediumPx,
-            marginBottom: MarginSmallPx,
-            textAlign: "left",
-          }}
-        >
-          {product.title}
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          color="warning.main"
-          sx={{
-            textAlign: "left",
-            fontWeight: "bold",
-            marginBottom: MarginMediumPx,
-          }}
-        >
-          {pricePerUnitWithCurrency(Number(product.price), "€")}
-        </Typography>
-        <CardActions
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            p: 0,
-            marginBottom: MarginMediumPx,
-          }}
-        >
-          <ActionBar
-            quantity={currentlyInBag ? currentlyInBag?.quantity || 0 : 0}
-            onAdd={() => addToBag(product)}
-            onRemove={() => removeFromBag(product.id)}
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%", // Ensure each card takes the full height of its parent
+      }}
+    >
+      <Card sx={{ minHeight: 450, p: MarginSmallPx, flex: 1 }}>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <CardMedia
+            component="img"
+            alt="item-miniature"
+            sx={{ width: 151, marginBottom: MarginSmallPx }}
+            image={product.image}
           />
-        </CardActions>
+        </Box>
+        <Chip label={product.category} size="small" />
 
-        {currentlyInBag?.quantity ? (
+        <CardContent
+          sx={{
+            p: 0,
+          }}
+        >
           <Typography
-            variant="caption"
-            color="text.secondary"
-            sx={{ textAlign: "right" }}
+            gutterBottom
+            variant="subtitle1"
+            noWrap
+            style={{
+              overflow: "hidden", // Hides overflow text
+              textOverflow: "ellipsis", // Displays ellipsis for overflow text
+              whiteSpace: "nowrap", // Prevents line breaks
+              marginTop: MarginMediumPx,
+              marginBottom: MarginSmallPx,
+              textAlign: "left",
+            }}
           >
-            You have currently {currentlyInBag.quantity} piece(s) of this item
-            in your bag: <br />
-            {Number(product.price) * Number(currentlyInBag.quantity)}€
+            {product.title}
           </Typography>
-        ) : (
-          ""
-        )}
-        <CardContentWithReadMore text={product.description} />
-      </CardContent>
-    </Card>
+          <Typography
+            variant="subtitle1"
+            color="warning.main"
+            sx={{
+              textAlign: "left",
+              fontWeight: "bold",
+              marginBottom: MarginMediumPx,
+            }}
+          >
+            {pricePerUnitWithCurrency(Number(product.price), "€")}
+          </Typography>
+          <CardActions
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              p: 0,
+              marginBottom: MarginMediumPx,
+            }}
+          >
+            <ActionBar
+              quantity={currentlyInBag ? currentlyInBag?.quantity || 0 : 0}
+              onAdd={() => addToBag(product)}
+              onRemove={() => removeFromBag(product.id)}
+            />
+          </CardActions>
+
+          {currentlyInBag?.quantity ? (
+            <Typography
+              variant="caption"
+              color="text.secondary"
+              sx={{ textAlign: "right" }}
+            >
+              You have currently {currentlyInBag.quantity} piece(s) of this item
+              in your bag: <br />
+              {Number(product.price) * Number(currentlyInBag.quantity)}€
+            </Typography>
+          ) : (
+            ""
+          )}
+          <CardContentWithReadMore text={product.description} />
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 export default ProductCard;
