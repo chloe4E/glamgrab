@@ -40,14 +40,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          border: "1px solid green",
         }}
       >
         <Box
           sx={{
             display: "flex",
             justifyContent: "center",
-            border: "1px solid blue",
           }}
         >
           <CardMedia
@@ -61,7 +59,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <CardContent
           sx={{
             p: 0,
-            border: "1px solid red",
           }}
         >
           <Chip label={product.category} size="small" />
