@@ -28,13 +28,11 @@ const ProductDetailPage: React.FC = () => {
               display: "flex",
               justifyContent: "space-around",
               alignItems: "center",
-              border: "1px solid green",
             }}
           >
             <Grid
               item
               sx={{
-                border: "1px solid blue",
                 m: MarginMediumPx,
               }}
             >
@@ -50,7 +48,6 @@ const ProductDetailPage: React.FC = () => {
               sx={{
                 width: "300px",
                 m: MarginMediumPx,
-                border: "1px solid red",
               }}
             >
               <Typography variant="h4">{product.title}</Typography>
