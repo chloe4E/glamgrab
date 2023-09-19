@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import { Product } from "../../Types/types";
 import ActionBar from "./productActionBar";
 import { MarginSmallPx, MarginMediumPx } from "../../utils/styles";
-import { Box, Chip } from "@mui/material";
+import { autocompleteClasses, Box, Chip } from "@mui/material";
 import CardContentWithReadMore from "./CardContentWithReadMore";
 import useGlamGrabStore from "../../store/store";
 
@@ -46,6 +46,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           sx={{
             display: "flex",
             justifyContent: "center",
+            marginTop: "auto",
+            marginBottom: "auto",
           }}
         >
           <CardMedia
