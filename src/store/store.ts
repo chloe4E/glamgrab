@@ -6,8 +6,9 @@ interface GlamGrabState {
   products: Product[];
   productsInBag: ProductInBag[];
   fetchAllProducts: () => Promise<void>;
-  addToBag: (product: Product) => void;
-  removeFromBag: (productId: number) => void;
+  addOneToBag: (product: Product) => void;
+  removeOneFromBag: (productId: number) => void;
+  removeItemFromBag: (productId: number) => void;
   totalQuantityInBag: () => number;
 }
 
@@ -19,7 +20,7 @@ const useGlamGrabStore = create<GlamGrabState>((set, get) => ({
       .then((data) => set({ products: data }))
       .catch((error) => console.log(`error this will be a toast: ${error}`));
   },
-  addToBag: (product: Product) => {
+  addOneToBag: (product: Product) => {
     set((state) => {
       // Check if the product is already in the bag
       const existingProduct = state.productsInBag.find(
@@ -51,7 +52,7 @@ const useGlamGrabStore = create<GlamGrabState>((set, get) => ({
       }
     });
   },
-  removeFromBag: (productId: number) => {
+  removeOneFromBag: (productId: number) => {
     set((state) => ({
       productsInBag: state.productsInBag
         .map((product) => {
@@ -65,6 +66,13 @@ const useGlamGrabStore = create<GlamGrabState>((set, get) => ({
           return product;
         })
         .filter(Boolean) as ProductInBag[],
+    }));
+  },
+  removeItemFromBag: (productId: number) => {
+    set((state) => ({
+      productsInBag: state.productsInBag.filter(
+        (product) => product.id !== productId
+      ),
     }));
   },
   totalQuantityInBag: () =>
