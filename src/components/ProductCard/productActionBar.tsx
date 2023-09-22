@@ -41,7 +41,7 @@ const ActionBar: React.FC<ActionBarProps> = ({ quantity, onAdd, onRemove }) => {
             sx={{ fontWeight: "bold", marginRight: MarginSmallPx }}
           >
             Add to bag
-          </Typography>{" "}
+          </Typography>
           <ArrowForwardOutlinedIcon sx={{ color: "white" }} />
         </IconButton>
       </Box>
