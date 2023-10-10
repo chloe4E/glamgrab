@@ -16,13 +16,15 @@ const ProductDetailPage: React.FC = () => {
   const productInBag = productsInBag.filter(
     (p: Product) => p.id == Number(productId)
   )[0];
+
   const addToBag = useGlamGrabStore((state) => state.addOneToBag);
   const removeFromBag = useGlamGrabStore((state) => state.removeOneFromBag);
+
   useEffect(() => {
     fetchAllProducts();
   }, [fetchAllProducts]);
-  console.log(products);
-  console.log(product);
+
+
   return (
     <>
       <ButtonAppBar />
