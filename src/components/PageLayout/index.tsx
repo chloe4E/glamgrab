@@ -16,6 +16,8 @@ const Container = ({ children }: { children: ReactNode }) => (
   <Grid
     style={{
       padding: `${MarginLargePx} ${MarginLargePx} 0`,
+      width: "100%",
+      height: "100%",
     }}
   >
     {children}

@@ -9,16 +9,15 @@ import { MarginSmallPx, MarginMediumPx } from "../../utils/styles";
 import { Box, Chip } from "@mui/material";
 import CardContentWithReadMore from "./CardContentWithReadMore";
 import useGlamGrabStore from "../../store/store";
+import pricePerUnitWithCurrency from "../../utils/helper";
+import { useNavigate } from "react-router-dom";
 
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const pricePerUnitWithCurrency = (price: number, currency: string) => {
-    return `${price.toFixed(2)}${currency}`;
-  };
-
+  const navigate = useNavigate();
   const addToBag = useGlamGrabStore((state) => state.addOneToBag);
   const removeFromBag = useGlamGrabStore((state) => state.removeOneFromBag);
   const currentlyInBag = useGlamGrabStore((state) =>
@@ -55,6 +54,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             alt="item-miniature"
             sx={{ width: 151, marginBottom: MarginSmallPx }}
             image={product.image}
+            onClick={() => navigate(`/productDetailPage/${product.id}`)}
           />
         </Box>
 
