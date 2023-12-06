@@ -15,7 +15,9 @@ interface ContainerWithTitleProps extends TitleForContainerProps {
 const Container = ({ children }: { children: ReactNode }) => (
   <Grid
     style={{
+      width: "100%",
       padding: `${MarginLargePx} ${MarginLargePx} 0`,
+      backgroundColor: "#f5f5f5",
     }}
   >
     {children}

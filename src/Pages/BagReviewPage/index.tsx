@@ -3,25 +3,23 @@ import ButtonAppBar from "../../components/Header";
 import { ContainerWithTitle } from "../../components/PageLayout";
 
 import ProductReviewList from "../../components/ProductReviewList";
-import { Item } from "../../Types/types";
 
-interface BagReviewPageProps {
-  items: Item[];
-}
+import { Grid } from "@mui/material";
+import { TotalCard } from "./TotalCard";
 
-const BagReviewPage: React.FC<BagReviewPageProps> = ({
-  items,
-}: BagReviewPageProps) => {
-  // const totalAmount: number = items?.reduce(
-  //   (accumulator, currentValue) => accumulator + currentValue.unitPrice,
-  //   0
-  // );
-
+const BagReviewPage: React.FC = () => {
   return (
     <>
-      <ButtonAppBar numberOfItemsInCart={12} />
+      <ButtonAppBar />
       <ContainerWithTitle title="Bag Review:">
-        <ProductReviewList />
+        <Grid container spacing={2} sx={{ display: "flex" }}>
+          <Grid item lg={8}>
+            <ProductReviewList />
+          </Grid>
+          <Grid item lg={4}>
+            <TotalCard />
+          </Grid>
+        </Grid>
       </ContainerWithTitle>
     </>
   );

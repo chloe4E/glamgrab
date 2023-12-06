@@ -10,6 +10,7 @@ interface GlamGrabState {
   removeOneFromBag: (productId: number) => void;
   removeItemFromBag: (productId: number) => void;
   totalQuantityInBag: () => number;
+  totalAmountToPayInBag: () => number;
 }
 
 const useGlamGrabStore = create<GlamGrabState>((set, get) => ({
@@ -78,6 +79,12 @@ const useGlamGrabStore = create<GlamGrabState>((set, get) => ({
   totalQuantityInBag: () =>
     get().productsInBag.reduce(
       (total, product) => total + (product.quantity || 0),
+      0
+    ) as number,
+  totalAmountToPayInBag: () =>
+    get().productsInBag.reduce(
+      (total, product) =>
+        total + (product.quantity || 0) * Number(product.price),
       0
     ) as number,
 }));
