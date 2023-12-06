@@ -14,8 +14,6 @@ type LoginInfoRequestBody struct {
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("got /login request\n")
 
-	fmt.Printf("got /login request\n")
-
 	var requestBody LoginInfoRequestBody
 	err := json.NewDecoder(r.Body).Decode(&requestBody)
 	if err != nil {

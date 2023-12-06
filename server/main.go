@@ -22,6 +22,7 @@ func main() {
 	mux.HandleFunc("/", handlers.RootHandler)
 	mux.HandleFunc("/hello", handlers.HelloHandler)
 	mux.HandleFunc("/api/login", handlers.LoginHandler)
+	mux.HandleFunc("/api/signup", handlers.SignupHandler) 
 
 	handler := c.Handler(mux)
 	log.Println("Listening on :3000")
