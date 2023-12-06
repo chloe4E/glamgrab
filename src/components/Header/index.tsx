@@ -4,10 +4,9 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
 import CheckroomIcon from "@mui/icons-material/Checkroom";
-import LoginIcon from "@mui/icons-material/Login";
+import PersonIcon from "@mui/icons-material/Person";
 import { useNavigate } from "react-router-dom";
 import useGlamGrabStore from "../../store/store";
 import { useEffect, useState } from "react";
@@ -35,41 +34,32 @@ const ButtonAppBar: React.FC = () => {
     <Box sx={{ flexGrow: 1, width: "100%" }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <IconButton onClick={handleLoginClick}>
-            <LoginIcon />
-          </IconButton>
           <Box
             sx={{
               flexGrow: 1,
               display: "flex",
               alignItems: "center",
             }}
+            onClick={() => {
+              navigate("/");
+            }}
           >
             <CheckroomIcon />
+
             <Typography variant="h6" m={1}>
               Welcome to Glamgrab
             </Typography>
           </Box>
-          <Box onClick={handleGoToBagReviewClick}>
-            <IconButton>
-              <ShoppingBasketIcon />
-            </IconButton>
+          <IconButton onClick={handleLoginClick}>
+            <PersonIcon />
+          </IconButton>
+
+          <IconButton onClick={handleGoToBagReviewClick}>
+            <ShoppingBasketIcon />
             <Typography variant="h6" component="div" sx={{ ml: 1 }}>
               {total}
             </Typography>
-          </Box>
+          </IconButton>
         </Toolbar>
       </AppBar>
     </Box>

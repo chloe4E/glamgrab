@@ -46,10 +46,11 @@ const ProductReviewCard: React.FC<ProductReviewCardProps> = ({
         <Typography gutterBottom variant="body1" component="div">
           {item.title}
         </Typography>
+
         <IconButton onClick={() => removeItemFromBag(item.id)}>
           <DeleteIcon />
+          <Typography variant="body1"> Remove</Typography>
         </IconButton>
-        Remove
       </CardContent>
       <CardActions
         sx={{
