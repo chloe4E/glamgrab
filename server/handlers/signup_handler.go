@@ -36,26 +36,21 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Extract username and password from the request body (assuming JSON format)
-	// ...
-
-	// Check if the credentials already exist
-	if CredentialsExit(username, password) {
+	if CredentialsExist(username, password) {
 		http.Error(w, "Username and password already exist", http.StatusConflict)
 		return
 	}
 
-	// Store the new username and password
 	StoreCredentials(username, password)
 
-	// Respond with success message or other appropriate response
+	// Respond with success message if everything is ok:
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("Signup successful"))
 }
 
 // check if credentials already exist:
 
-func CredentialsExit(username, password string) bool {
+func CredentialsExist(username, password string) bool {
 	// check if credentials already exist
 	// if yes return true
 	// if not return false
@@ -78,8 +73,6 @@ func CredentialsExit(username, password string) bool {
 			fmt.Println("Error reading the file:", err)
 			os.Exit(1)
 		}
-
-		return false
 	}
 	return false
 }
